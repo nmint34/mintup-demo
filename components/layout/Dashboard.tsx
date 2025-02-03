@@ -23,16 +23,18 @@ const Dashboard = () => {
 
   const ChatView = () => (
     <div className="space-y-4">
-      <div className="h-96 bg-gray-50 rounded-lg p-4 overflow-y-auto">
+      <div className="h-96 bg-brand-teal/5 rounded-lg p-4 overflow-y-auto">
         {/* Chat messages would go here */}
       </div>
       <div className="flex space-x-2">
         <input
           type="text"
           placeholder="How can I help you today?"
-          className="flex-1 p-2 border rounded-lg"
+          className="flex-1 p-2 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-brand-green"
         />
-        <button className="p-2 bg-blue-500 text-white rounded-lg">Send</button>
+        <button className="p-2 bg-brand-green hover:bg-brand-green/90 text-white rounded-lg">
+          Send
+        </button>
       </div>
     </div>
   );
@@ -42,15 +44,15 @@ const Dashboard = () => {
       {Array.from({ length: 31 }, (_, i) => (
         <div 
           key={i} 
-          className="aspect-square border rounded p-1 text-sm hover:bg-gray-50"
+          className="aspect-square border rounded p-1 text-sm hover:bg-brand-teal/5"
         >
           <div className="font-bold">{i + 1}</div>
           {events.filter(e => new Date(e.date).getDate() === i + 1).map((event, idx) => (
             <div 
               key={idx} 
               className={`text-xs p-1 mt-1 rounded ${
-                event.type === 'meeting' ? 'bg-blue-100' :
-                event.type === 'payment' ? 'bg-green-100' :
+                event.type === 'meeting' ? 'bg-brand-teal/20' :
+                event.type === 'payment' ? 'bg-brand-green/20' :
                 'bg-gray-100'
               }`}
             >
@@ -70,8 +72,8 @@ const Dashboard = () => {
             <CardTitle>Monthly Spend</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$1,750</div>
-            <div className="text-sm text-gray-500">This Month</div>
+            <div className="text-2xl font-bold text-brand-green">$1,750</div>
+            <div className="text-sm text-brand-navy/60">This Month</div>
           </CardContent>
         </Card>
         <Card>
@@ -79,8 +81,8 @@ const Dashboard = () => {
             <CardTitle>Budget Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-500">On Track</div>
-            <div className="text-sm text-gray-500">15% under budget</div>
+            <div className="text-2xl font-bold text-brand-green">On Track</div>
+            <div className="text-sm text-brand-navy/60">15% under budget</div>
           </CardContent>
         </Card>
         <Card>
@@ -88,8 +90,8 @@ const Dashboard = () => {
             <CardTitle>Upcoming Bills</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">3</div>
-            <div className="text-sm text-gray-500">Next 7 days</div>
+            <div className="text-2xl font-bold text-brand-green">3</div>
+            <div className="text-sm text-brand-navy/60">Next 7 days</div>
           </CardContent>
         </Card>
       </div>
@@ -101,9 +103,9 @@ const Dashboard = () => {
         <CardContent>
           <div className="space-y-2">
             {expenses.map((expense, idx) => (
-              <div key={idx} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                <span>{expense.category}</span>
-                <span className="font-bold">${expense.amount}</span>
+              <div key={idx} className="flex justify-between items-center p-2 bg-brand-teal/5 rounded hover:bg-brand-teal/10">
+                <span className="text-brand-navy">{expense.category}</span>
+                <span className="font-bold text-brand-green">${expense.amount}</span>
               </div>
             ))}
           </div>
@@ -139,7 +141,7 @@ const Dashboard = () => {
         <div className="grid grid-cols-12 gap-4">
           {/* Email Sidebar */}
           <div className="col-span-3 bg-white rounded-lg p-4">
-            <button className="w-full bg-blue-500 text-white rounded-lg p-2 mb-4">
+            <button className="w-full bg-brand-green hover:bg-brand-green/90 text-white rounded-lg p-2 mb-4">
               Compose
             </button>
             {['Inbox', 'Starred', 'Sent', 'Drafts'].map((folder) => (
@@ -148,8 +150,8 @@ const Dashboard = () => {
                 onClick={() => setSelectedFolder(folder.toLowerCase())}
                 className={`w-full text-left p-2 rounded-lg ${
                   selectedFolder === folder.toLowerCase()
-                    ? 'bg-blue-50 text-blue-600'
-                    : 'hover:bg-gray-50'
+                    ? 'bg-brand-green/10 text-brand-green'
+                    : 'hover:bg-brand-teal/5'
                 }`}
               >
                 {folder}
@@ -163,19 +165,19 @@ const Dashboard = () => {
               <div
                 key={idx}
                 className={`p-3 rounded-lg cursor-pointer ${
-                  !email.isRead ? 'bg-blue-50' : 'hover:bg-gray-50'
+                  !email.isRead ? 'bg-brand-green/10' : 'hover:bg-brand-teal/5'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className={`font-medium ${!email.isRead ? 'text-black' : 'text-gray-600'}`}>
+                  <span className={`font-medium ${!email.isRead ? 'text-brand-navy' : 'text-brand-navy/60'}`}>
                     {email.sender}
                   </span>
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-brand-navy/60">
                     {new Date(email.date).toLocaleTimeString()}
                   </span>
                 </div>
-                <div className="text-sm font-medium">{email.subject}</div>
-                <div className="text-sm text-gray-500 truncate">{email.preview}</div>
+                <div className="text-sm font-medium text-brand-navy">{email.subject}</div>
+                <div className="text-sm text-brand-navy/60 truncate">{email.preview}</div>
               </div>
             ))}
           </div>
@@ -210,9 +212,9 @@ const Dashboard = () => {
           <input
             type="text"
             placeholder="Search stored memories..."
-            className="flex-1 p-2 border rounded-lg"
+            className="flex-1 p-2 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-brand-green"
           />
-          <select className="p-2 border rounded-lg">
+          <select className="p-2 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-brand-green">
             <option value="all">All Types</option>
             <option value="subscription">Subscriptions</option>
             <option value="contact">Contacts</option>
@@ -225,14 +227,14 @@ const Dashboard = () => {
             <Card key={idx}>
               <CardContent className="p-4">
                 <div className="flex items-start justify-between mb-2">
-                  <div className="font-medium capitalize">{memory.type}</div>
-                  <div className="text-xs text-gray-500">
+                  <div className="font-medium capitalize text-brand-navy">{memory.type}</div>
+                  <div className="text-xs text-brand-navy/60">
                     Stored: {new Date(memory.dateStored).toLocaleDateString()}
                   </div>
                 </div>
-                <div className="text-sm">{memory.detail}</div>
+                <div className="text-sm text-brand-navy">{memory.detail}</div>
                 {memory.nextAction && (
-                  <div className="mt-2 text-xs bg-blue-50 text-blue-700 p-2 rounded">
+                  <div className="mt-2 text-xs bg-brand-green/10 text-brand-green p-2 rounded">
                     Next action: {new Date(memory.nextAction).toLocaleDateString()}
                   </div>
                 )}
@@ -250,16 +252,16 @@ const Dashboard = () => {
         <Card key={idx}>
           <CardContent className="p-4 flex items-center space-x-4">
             <div className={`p-2 rounded-full ${
-              event.type === 'meeting' ? 'bg-blue-100' :
-              event.type === 'payment' ? 'bg-green-100' :
+              event.type === 'meeting' ? 'bg-brand-teal/20' :
+              event.type === 'payment' ? 'bg-brand-green/20' :
               'bg-gray-100'
             }`}>
               {event.type === 'meeting' ? '🤝' : 
                event.type === 'payment' ? '💰' : '✓'}
             </div>
             <div>
-              <div className="font-bold">{event.title}</div>
-              <div className="text-sm text-gray-500">
+              <div className="font-bold text-brand-navy">{event.title}</div>
+              <div className="text-sm text-brand-navy/60">
                 {new Date(event.date).toLocaleDateString()}
               </div>
             </div>
@@ -272,19 +274,19 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Top Navigation */}
-      <div className="bg-white border-b">
+      <div className="bg-brand-navy border-b">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <button 
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="p-2 hover:bg-gray-100 rounded-lg md:hidden"
+                className="p-2 hover:bg-brand-navy/80 rounded-lg md:hidden text-white"
               >
                 <Menu className="w-6 h-6" />
               </button>
-              <span className="font-bold text-xl">MintUp AI</span>
+              <span className="font-bold text-xl text-brand-green">MintUp AI</span>
             </div>
-            <button className="p-2 hover:bg-gray-100 rounded-lg">
+            <button className="p-2 hover:bg-brand-navy/80 rounded-lg text-white">
               <Settings className="w-6 h-6" />
             </button>
           </div>
@@ -310,7 +312,9 @@ const Dashboard = () => {
                   key={id}
                   onClick={() => setActiveTab(id)}
                   className={`w-full flex items-center space-x-2 p-2 rounded-lg ${
-                    activeTab === id ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
+                    activeTab === id 
+                      ? 'bg-brand-green text-white'
+                      : 'hover:bg-brand-teal/10 text-brand-navy'
                   }`}
                 >
                   <Icon className="w-5 h-5" />
