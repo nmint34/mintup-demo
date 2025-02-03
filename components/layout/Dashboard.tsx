@@ -122,7 +122,24 @@ const Dashboard = () => {
   const EmailView = () => {
     const [selectedFolder, setSelectedFolder] = useState('inbox');
     
-    const emails = [/* ... your email data ... */];
+    const emails = [
+      { 
+        sender: 'Bank of America',
+        subject: 'Your Monthly Statement',
+        preview: 'Your monthly statement for ending in *4589 is now available...',
+        date: '2025-02-01 09:15',
+        isRead: false,
+        isStarred: true
+      },
+      {
+        sender: 'John Smith',
+        subject: 'Project Deadline Update',
+        preview: 'Team, I wanted to discuss the upcoming deadline for...',
+        date: '2025-02-02 14:30',
+        isRead: true,
+        isStarred: false
+      }
+    ];
     
     return (
       <div className="space-y-6">
@@ -146,7 +163,7 @@ const Dashboard = () => {
               </button>
             ))}
           </div>
-  
+
           {/* Email List */}
           <div className="col-span-9 space-y-3">
             {emails.map((email, idx) => (
