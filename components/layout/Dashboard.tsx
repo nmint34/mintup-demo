@@ -23,7 +23,7 @@ const Dashboard = () => {
 
   const ChatView = () => (
     <div className="space-y-6">
-      <div className="h-[500px] bg-gradient-to-b from-brand-teal/5 to-transparent rounded-xl p-6 overflow-y-auto transition-all duration-300 ease-in-out">
+      <div className="h-[500px] bg-brand-green/5 rounded-xl p-6 overflow-y-auto transition-all duration-300 ease-in-out">
         {/* Chat messages would go here */}
       </div>
       <div className="flex space-x-3">
@@ -31,7 +31,7 @@ const Dashboard = () => {
           <input
             type="text"
             placeholder="How can I help you today?"
-            className="w-full p-4 pr-12 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300 placeholder:text-gray-400"
+            className="w-full p-4 pr-12 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300 placeholder:text-brand-navy/40 text-brand-navy"
           />
           <button className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-brand-green hover:text-brand-green/80 transition-colors">
             <MessageSquare className="w-5 h-5" />
@@ -122,24 +122,7 @@ const Dashboard = () => {
   const EmailView = () => {
     const [selectedFolder, setSelectedFolder] = useState('inbox');
     
-    const emails = [
-      { 
-        sender: 'Bank of America',
-        subject: 'Your Monthly Statement',
-        preview: 'Your monthly statement for ending in *4589 is now available...',
-        date: '2025-02-01 09:15',
-        isRead: false,
-        isStarred: true
-      },
-      {
-        sender: 'John Smith',
-        subject: 'Project Deadline Update',
-        preview: 'Team, I wanted to discuss the upcoming deadline for...',
-        date: '2025-02-02 14:30',
-        isRead: true,
-        isStarred: false
-      }
-    ];
+    const emails = [/* ... your email data ... */];
     
     return (
       <div className="space-y-6">
@@ -156,33 +139,33 @@ const Dashboard = () => {
                 className={`w-full text-left p-3 rounded-xl mb-2 transition-all duration-200 ${
                   selectedFolder === folder.toLowerCase()
                     ? 'bg-brand-green/10 text-brand-green font-medium'
-                    : 'hover:bg-brand-teal/5 text-brand-navy'
+                    : 'hover:bg-brand-green/5 text-brand-navy font-medium'
                 }`}
               >
                 {folder}
               </button>
             ))}
           </div>
-
+  
           {/* Email List */}
           <div className="col-span-9 space-y-3">
             {emails.map((email, idx) => (
               <div
                 key={idx}
                 className={`p-4 rounded-xl cursor-pointer transition-all duration-200 hover:-translate-x-1 ${
-                  !email.isRead ? 'bg-brand-green/10' : 'hover:bg-brand-teal/5'
+                  !email.isRead ? 'bg-brand-green/10' : 'hover:bg-brand-green/5'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className={`font-medium ${!email.isRead ? 'text-brand-navy' : 'text-brand-navy/60'}`}>
+                  <span className={`font-medium ${!email.isRead ? 'text-brand-navy' : 'text-brand-navy/80'}`}>
                     {email.sender}
                   </span>
-                  <span className="text-sm text-brand-navy/60">
+                  <span className="text-sm text-brand-navy/80">
                     {new Date(email.date).toLocaleTimeString()}
                   </span>
                 </div>
                 <div className="text-sm font-medium text-brand-navy mt-1">{email.subject}</div>
-                <div className="text-sm text-brand-navy/60 truncate mt-1">{email.preview}</div>
+                <div className="text-sm text-brand-navy/80 truncate mt-1">{email.preview}</div>
               </div>
             ))}
           </div>
@@ -190,6 +173,7 @@ const Dashboard = () => {
       </div>
     );
   };
+  
 
   const MemoryBankView = () => {
     const memories = [
@@ -215,20 +199,21 @@ const Dashboard = () => {
       <div className="space-y-6">
         <div className="flex space-x-3">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-navy/40 w-5 h-5" />
             <input
               type="text"
               placeholder="Search stored memories..."
-              className="w-full pl-10 p-4 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300"
+              className="w-full pl-10 p-4 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300 text-brand-navy placeholder:text-brand-navy/40"
             />
           </div>
-          <select className="p-4 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300 bg-white">
+          <select className="p-4 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300 bg-white text-brand-navy">
             <option value="all">All Types</option>
             <option value="subscription">Subscriptions</option>
             <option value="contact">Contacts</option>
             <option value="preference">Preferences</option>
           </select>
         </div>
+  
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {memories.map((memory, idx) => (
