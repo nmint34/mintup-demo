@@ -31,7 +31,7 @@ const Dashboard = () => {
           <input
             type="text"
             placeholder="How can I help you today?"
-            className="w-full p-4 pr-12 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300 placeholder:text-brand-navy/40 text-brand-navy"
+            className="w-full p-4 pr-12 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300 placeholder:text-brand-navy/60 text-brand-navy font-medium"
           />
           <button className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-brand-green hover:text-brand-green/80 transition-colors">
             <MessageSquare className="w-5 h-5" />
