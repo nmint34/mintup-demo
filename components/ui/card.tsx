@@ -10,7 +10,7 @@ const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElemen
   <div
     ref={ref}
     className={cn(
-      "rounded-lg border border-brand-teal/10 bg-white shadow-sm hover:shadow-md transition-shadow duration-200",
+      "rounded-xl border border-brand-teal/10 bg-white shadow-sm hover:shadow-lg transition-all duration-300 ease-in-out",
       className
     )}
     {...props}
@@ -24,7 +24,10 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 ) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6 bg-gradient-to-r from-brand-teal/5 to-transparent", className)}
+    className={cn(
+      "flex flex-col space-y-1.5 p-6 bg-gradient-to-r from-brand-teal/5 to-transparent rounded-t-xl",
+      className
+    )}
     {...props}
   />
 ));

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { MessageSquare, Calendar, PieChart, BellRing, Settings, Menu, Brain, Mail } from 'lucide-react';
+import { MessageSquare, Calendar, PieChart, BellRing, Settings, Menu, Brain, Mail, Search } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Dashboard = () => {
@@ -22,17 +22,22 @@ const Dashboard = () => {
   ];
 
   const ChatView = () => (
-    <div className="space-y-4">
-      <div className="h-96 bg-brand-teal/5 rounded-lg p-4 overflow-y-auto">
+    <div className="space-y-6">
+      <div className="h-[500px] bg-gradient-to-b from-brand-teal/5 to-transparent rounded-xl p-6 overflow-y-auto transition-all duration-300 ease-in-out">
         {/* Chat messages would go here */}
       </div>
-      <div className="flex space-x-2">
-        <input
-          type="text"
-          placeholder="How can I help you today?"
-          className="flex-1 p-2 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-brand-green"
-        />
-        <button className="p-2 bg-brand-green hover:bg-brand-green/90 text-white rounded-lg">
+      <div className="flex space-x-3">
+        <div className="relative flex-1">
+          <input
+            type="text"
+            placeholder="How can I help you today?"
+            className="w-full p-4 pr-12 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300 placeholder:text-gray-400"
+          />
+          <button className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-brand-green hover:text-brand-green/80 transition-colors">
+            <MessageSquare className="w-5 h-5" />
+          </button>
+        </div>
+        <button className="px-6 py-4 bg-brand-green hover:bg-brand-green/90 text-white rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
           Send
         </button>
       </div>
@@ -40,17 +45,17 @@ const Dashboard = () => {
   );
 
   const CalendarView = () => (
-    <div className="grid grid-cols-7 gap-1">
+    <div className="grid grid-cols-7 gap-2">
       {Array.from({ length: 31 }, (_, i) => (
         <div 
           key={i} 
-          className="aspect-square border rounded p-1 text-sm hover:bg-brand-teal/5"
+          className="aspect-square border rounded-xl p-2 text-sm hover:bg-brand-teal/5 transition-colors duration-200"
         >
-          <div className="font-bold">{i + 1}</div>
+          <div className="font-bold text-brand-navy">{i + 1}</div>
           {events.filter(e => new Date(e.date).getDate() === i + 1).map((event, idx) => (
             <div 
               key={idx} 
-              className={`text-xs p-1 mt-1 rounded ${
+              className={`text-xs p-2 mt-1 rounded-lg transition-all duration-200 hover:scale-105 cursor-pointer ${
                 event.type === 'meeting' ? 'bg-brand-teal/20' :
                 event.type === 'payment' ? 'bg-brand-green/20' :
                 'bg-gray-100'
@@ -65,14 +70,14 @@ const Dashboard = () => {
   );
 
   const FinanceView = () => (
-    <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-4">
+    <div className="space-y-6">
+      <div className="grid grid-cols-3 gap-6">
         <Card>
           <CardHeader>
             <CardTitle>Monthly Spend</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-brand-green">$1,750</div>
+            <div className="text-3xl font-bold text-brand-green transition-all duration-300 hover:scale-105">$1,750</div>
             <div className="text-sm text-brand-navy/60">This Month</div>
           </CardContent>
         </Card>
@@ -81,7 +86,7 @@ const Dashboard = () => {
             <CardTitle>Budget Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-brand-green">On Track</div>
+            <div className="text-3xl font-bold text-brand-green transition-all duration-300 hover:scale-105">On Track</div>
             <div className="text-sm text-brand-navy/60">15% under budget</div>
           </CardContent>
         </Card>
@@ -90,7 +95,7 @@ const Dashboard = () => {
             <CardTitle>Upcoming Bills</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-brand-green">3</div>
+            <div className="text-3xl font-bold text-brand-green transition-all duration-300 hover:scale-105">3</div>
             <div className="text-sm text-brand-navy/60">Next 7 days</div>
           </CardContent>
         </Card>
@@ -101,10 +106,10 @@ const Dashboard = () => {
           <CardTitle>Expense Breakdown</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2">
+          <div className="space-y-3">
             {expenses.map((expense, idx) => (
-              <div key={idx} className="flex justify-between items-center p-2 bg-brand-teal/5 rounded hover:bg-brand-teal/10">
-                <span className="text-brand-navy">{expense.category}</span>
+              <div key={idx} className="flex justify-between items-center p-4 bg-brand-teal/5 rounded-xl hover:bg-brand-teal/10 transition-all duration-200 cursor-pointer hover:-translate-x-1">
+                <span className="text-brand-navy font-medium">{expense.category}</span>
                 <span className="font-bold text-brand-green">${expense.amount}</span>
               </div>
             ))}
@@ -137,21 +142,21 @@ const Dashboard = () => {
     ];
     
     return (
-      <div className="space-y-4">
-        <div className="grid grid-cols-12 gap-4">
+      <div className="space-y-6">
+        <div className="grid grid-cols-12 gap-6">
           {/* Email Sidebar */}
-          <div className="col-span-3 bg-white rounded-lg p-4">
-            <button className="w-full bg-brand-green hover:bg-brand-green/90 text-white rounded-lg p-2 mb-4">
+          <div className="col-span-3 bg-white rounded-xl p-4 shadow-sm">
+            <button className="w-full bg-brand-green hover:bg-brand-green/90 text-white rounded-xl p-3 mb-4 font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
               Compose
             </button>
             {['Inbox', 'Starred', 'Sent', 'Drafts'].map((folder) => (
               <button
                 key={folder}
                 onClick={() => setSelectedFolder(folder.toLowerCase())}
-                className={`w-full text-left p-2 rounded-lg ${
+                className={`w-full text-left p-3 rounded-xl mb-2 transition-all duration-200 ${
                   selectedFolder === folder.toLowerCase()
-                    ? 'bg-brand-green/10 text-brand-green'
-                    : 'hover:bg-brand-teal/5'
+                    ? 'bg-brand-green/10 text-brand-green font-medium'
+                    : 'hover:bg-brand-teal/5 text-brand-navy'
                 }`}
               >
                 {folder}
@@ -160,11 +165,11 @@ const Dashboard = () => {
           </div>
 
           {/* Email List */}
-          <div className="col-span-9 space-y-2">
+          <div className="col-span-9 space-y-3">
             {emails.map((email, idx) => (
               <div
                 key={idx}
-                className={`p-3 rounded-lg cursor-pointer ${
+                className={`p-4 rounded-xl cursor-pointer transition-all duration-200 hover:-translate-x-1 ${
                   !email.isRead ? 'bg-brand-green/10' : 'hover:bg-brand-teal/5'
                 }`}
               >
@@ -176,8 +181,8 @@ const Dashboard = () => {
                     {new Date(email.date).toLocaleTimeString()}
                   </span>
                 </div>
-                <div className="text-sm font-medium text-brand-navy">{email.subject}</div>
-                <div className="text-sm text-brand-navy/60 truncate">{email.preview}</div>
+                <div className="text-sm font-medium text-brand-navy mt-1">{email.subject}</div>
+                <div className="text-sm text-brand-navy/60 truncate mt-1">{email.preview}</div>
               </div>
             ))}
           </div>
@@ -207,14 +212,17 @@ const Dashboard = () => {
     ];
 
     return (
-      <div className="space-y-4">
-        <div className="flex space-x-2 mb-4">
-          <input
-            type="text"
-            placeholder="Search stored memories..."
-            className="flex-1 p-2 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-brand-green"
-          />
-          <select className="p-2 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+      <div className="space-y-6">
+        <div className="flex space-x-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Search stored memories..."
+              className="w-full pl-10 p-4 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300"
+            />
+          </div>
+          <select className="p-4 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-brand-green transition-all duration-300 bg-white">
             <option value="all">All Types</option>
             <option value="subscription">Subscriptions</option>
             <option value="contact">Contacts</option>
@@ -222,11 +230,11 @@ const Dashboard = () => {
           </select>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {memories.map((memory, idx) => (
-            <Card key={idx}>
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between mb-2">
+            <Card key={idx} className="hover:-translate-y-1 transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between mb-3">
                   <div className="font-medium capitalize text-brand-navy">{memory.type}</div>
                   <div className="text-xs text-brand-navy/60">
                     Stored: {new Date(memory.dateStored).toLocaleDateString()}
@@ -234,7 +242,7 @@ const Dashboard = () => {
                 </div>
                 <div className="text-sm text-brand-navy">{memory.detail}</div>
                 {memory.nextAction && (
-                  <div className="mt-2 text-xs bg-brand-green/10 text-brand-green p-2 rounded">
+                  <div className="mt-3 text-sm bg-brand-green/10 text-brand-green p-3 rounded-lg">
                     Next action: {new Date(memory.nextAction).toLocaleDateString()}
                   </div>
                 )}
@@ -249,9 +257,9 @@ const Dashboard = () => {
   const NotificationsView = () => (
     <div className="space-y-4">
       {events.map((event, idx) => (
-        <Card key={idx}>
+        <Card key={idx} className="hover:-translate-x-1 transition-all duration-300">
           <CardContent className="p-4 flex items-center space-x-4">
-            <div className={`p-2 rounded-full ${
+            <div className={`p-3 rounded-full transition-transform duration-200 hover:scale-110 ${
               event.type === 'meeting' ? 'bg-brand-teal/20' :
               event.type === 'payment' ? 'bg-brand-green/20' :
               'bg-gray-100'
@@ -272,21 +280,21 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Top Navigation */}
-      <div className="bg-brand-navy border-b">
+      <div className="bg-brand-navy shadow-lg">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-3">
               <button 
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="p-2 hover:bg-brand-navy/80 rounded-lg md:hidden text-white"
+                className="p-2 hover:bg-brand-navy/80 rounded-lg md:hidden text-white transition-colors"
               >
                 <Menu className="w-6 h-6" />
               </button>
               <span className="font-bold text-xl text-brand-green">MintUp AI</span>
             </div>
-            <button className="p-2 hover:bg-brand-navy/80 rounded-lg text-white">
+            <button className="p-2 hover:bg-brand-navy/80 rounded-lg text-white transition-colors">
               <Settings className="w-6 h-6" />
             </button>
           </div>
@@ -294,12 +302,12 @@ const Dashboard = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex">
+        <div className="flex gap-6">
           {/* Sidebar Navigation */}
           <div className={`${
             menuOpen ? 'block' : 'hidden'
-          } md:block fixed md:relative top-0 left-0 h-full md:h-auto z-50 bg-white md:bg-transparent`}>
-            <div className="w-64 space-y-2 p-4">
+          } md:block fixed md:relative top-0 left-0 h-full md:h-auto z-50 bg-white md:bg-transparent md:w-64`}>
+            <div className="w-64 space-y-2 p-4 bg-white rounded-xl shadow-sm">
               {[
                 { icon: MessageSquare, label: 'Chat', id: 'chat' },
                 { icon: Calendar, label: 'Calendar', id: 'calendar' },
@@ -311,22 +319,22 @@ const Dashboard = () => {
                 <button
                   key={id}
                   onClick={() => setActiveTab(id)}
-                  className={`w-full flex items-center space-x-2 p-2 rounded-lg ${
+                  className={`w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 ${
                     activeTab === id 
-                      ? 'bg-brand-green text-white'
-                      : 'hover:bg-brand-teal/10 text-brand-navy'
+                      ? 'bg-brand-green text-white shadow-lg hover:-translate-y-0.5'
+                      : 'hover:bg-brand-teal/10 text-brand-navy hover:translate-x-1'
                   }`}
                 >
                   <Icon className="w-5 h-5" />
-                  <span>{label}</span>
+                  <span className="font-medium">{label}</span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 ml-0 md:ml-8">
-            <Card>
+          <div className="flex-1">
+            <Card className="overflow-hidden">
               <CardHeader>
                 <CardTitle>
                   {activeTab === 'chat' && 'AI Assistant'}
